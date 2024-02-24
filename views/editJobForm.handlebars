@@ -62,12 +62,12 @@
                     <li>
                         <label for="applied" class="text-muted">Applied to job?</label>
                         <input type="checkbox" name="jobApplication" id="applicationStatus"
-                            value={{selectedJob.haveApplied}}>
+                            {{#if selectedJob.haveApplied}}checked{{/if}}>
                     </li>
                     <li>
                         <label for="feedback" class="text-muted">Did you hear back from this company since you
                             applied?</label>
-                        <input type="checkbox" name="feedback" id="feedbackStatus" value={{selectedJob.feedback}}>
+                        <input type="checkbox" name="feedback" id="feedbackStatus" {{#if selectedJob.feedback}}checked{{/if}}>
                     </li>
                 </ul>
             </div>

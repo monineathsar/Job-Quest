@@ -6,7 +6,6 @@ router.get('/jobCards', async (req, res) => {
     try {
        
         const jobs = await Jobs.findAll({ raw: true });
-        console.log(jobs);
         res.render('jobCards', {
             jobs
         });
@@ -19,7 +18,6 @@ router.get('/jobCards', async (req, res) => {
 // renders existing jobcard into job form on  extension
 router.get('/jobCards/:id', async (req, res) => {
     try {
-        console.log(req.params.id);
         const dbSelectedJob = await Jobs.findByPk(req.params.id);
         selectedJob = dbSelectedJob.get({ plain: true });
         res.render('editJobForm', {
