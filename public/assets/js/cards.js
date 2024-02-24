@@ -127,5 +127,5 @@ searchBtn.addEventListener('click', async (e) => {
 
 // renders jobform by its perspective job card in order to edit job card
 function getJobForm(id) {
-  window.location.href = '/' + id
+  window.location.href = '/jobCards/' + id
 };

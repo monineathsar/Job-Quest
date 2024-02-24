@@ -23,19 +23,6 @@ router.post('/', async (req, res) => {
     res.send(newJobCard);
 });
 
-// // renders existing jobcard into job form on  extension
-// router.get('/:id', async (req, res) => {
-//     try {
-//         const dbSelectedJob = await Jobs.findByPk(req.params.id);
-//         selectedJob = dbSelectedJob.get({ plain: true });
-//         res.render('editJobForm', {
-//             selectedJob
-//         });
-//     } catch {
-//         res.status(404).send("Error in fetching all jobCards1");
-//     }
-// });
-
 // to search a sepeciv job card by company name
 router.get('/search', async (req, res) => {
     try {
