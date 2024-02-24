@@ -23,7 +23,7 @@ function rangValfunc(val) {
 // for UPDATING job card
 async function updateJob(id) {
     try {
-        const response = await fetch('/jobform', {
+        const response = await fetch('/', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

@@ -32,7 +32,7 @@ createJobBtn.addEventListener('click', async (event) => {
     }
 
     try {
-        const response = await fetch('/jobform', {
+        const response = await fetch('/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

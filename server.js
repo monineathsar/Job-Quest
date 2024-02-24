@@ -16,7 +16,6 @@ const sequelize = require('./config/connection');
 // routes global variables
 const routes = require('./controllers/homepageController');
 const jobCardRoute = require('./controllers/jobCardController');
-const jobFormRoute = require('./controllers/jobFormController');
 
 // handlebars init
 
@@ -82,7 +81,6 @@ app.use(express.urlencoded({ extended: true }));
 // routes for SignUp/LogIn page, jobform page, and jobCard page
 app.use(routes);
 app.use(jobCardRoute);
-app.use(jobFormRoute);
 
 // server listener + sequelize sync
 

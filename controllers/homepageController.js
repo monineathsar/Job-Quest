@@ -1,93 +1,97 @@
 const router = require('express').Router();
-const passport = require('passport');
-
-const { Users } = require('../models');
 const { Jobs } = require('../models');
 
-// renders signup/landing page
-router.get('/', (req, res) => {
-    res.render('signUp&LogIn', {
-        isLoggedIn: req.session.isLoggedIn,
+// creates new job card with user input
+router.post('/', async (req, res) => {
+
+    const newJobCard = await Jobs.create({
+        userId: req.session.user.id,
+        company: req.body.company,
+        position: req.body.position,
+        link: req.body.link,
+        salary: req.body.salary
     });
+
+    res.send(newJobCard);
 });
 
-router.get('/signup', (req, res) => {
-    res.render('signup');
-});
+// renders empty job form on  extension
+router.get('/', async (req, res) => {
 
-router.get('/signin', (req, res) => {
-    res.render('signin', {
-        isLoggedIn: req.session.isLoggedIn,
-    });
-});
-
-// renders users page using user database data
-router.get('/users', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/')
+    }
     try {
-        const dbUsersData = await Users.findAll();
-        // map db data to plain json
-        const users = dbUsersData.map(dbUser => dbUser.get({ plain: true }));
-        console.log(users);
-        res.render('users', {
-            users,
-            loggedInUser: req.session.user || null,
-            isLoggedIn: req.session.isLoggedIn,
-        });
-    } catch (error) {
-        console.log('Err L:25 homepageController', error);
-        res.status(500).json({ error });
+        res.render('jobForm');
+    }
+    catch {
+        res.status(404).send("Error in fetching all jobCards");
     }
 });
 
-// renders user profile page given a user id
-router.get('/users/:userId', async (req, res) => {
+// renders existing jobcard into job form on  extension
+router.get('/:id', async (req, res) => {
     try {
-        const userData = await Users.findByPk(req.params.userId);
-        const user = userData.get({ plain: true });
-
-        res.render('userProfile', { user });
-    } catch (error) {
-        res.status(500).json({ error });
-    }
-});
-
-// logout 
-router.post('/logout', (req, res) => {
-
-    if (req.session.isLoggedIn) {
-        req.session.destroy(() => {
-            res.status(204).end();
+        const dbSelectedJob = await Jobs.findByPk(req.params.id);
+        selectedJob = dbSelectedJob.get({ plain: true });
+        res.render('editJobForm', {
+            selectedJob
         });
-    } else {
-        res.status(404).end();
+    } catch {
+        res.status(404).send("Error in fetching all jobCards");
     }
 });
 
-router.post('/signin', passport.authenticate('local'), (req, res) => {
-    console.log('signin')
-    console.log(req.user);
+// to search a sepeciv job card by company name
+router.get('/search', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/')
+    }
+    try {
 
-    req.session.save(() => {
-        req.session.user = req.user;
-        req.session.isLoggedIn = true;
-        res.json({ success: true });
-    });
+        const company = req.query.company;
+        const everyJob = await Jobs.findAll({
+            where: {
+                userId: req.session.user.id,
+                company,
+            }
+        });
 
+        res.send(everyJob);
+
+    } catch {
+        res.status(404).send("Error in fetching all jobCards");
+    }
 });
 
-router.post('/signup', async (req, res) => {
-
-    const newUser = await Users.create({
-        username: req.body.username,
-        password: req.body.password
-    });
-
-    res.send(newUser)
-});
-
-//this is for quotes
-router.get('/quotes', (req, res) => {
-    res.render('quotes');
+// to update jobcards
+router.put('/', async (req, res) => {
+    try {
+        const updateJobCard = await Jobs.update(
+            {
+                company: req.body.company,
+                position: req.body.position,
+                link: req.body.link,
+                salary: req.body.salary,
+                haveApplied: req.body.haveApplied,
+                feedback: req.body.feedback,
+                recruiterName: req.body.recruiterName,
+                recruiterPhone: req.body.recruiterPhone,
+                recruiterEmail: req.body.recruiterEmail,
+                // conditions for if dates not selected
+                screeningInterview: req.body.screeningInterview == "" ? null : req.body.screeningInterview,
+                technicalInterview: req.body.technicalInterview == "" ? null : req.body.technicalInterview,
+                finalInterview: req.body.finalInterview == "" ? null : req.body.finalInterview,
+                jobOffer: req.body.jobOffer
+            },
+            {
+                where: { id: req.body.id }
+            }
+        );
+        res.send(updateJobCard);
+    } catch (error) {
+        res.status(404).send("Fail to update job card.");
+    }
 });
 
 module.exports = router;
