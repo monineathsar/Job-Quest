@@ -1,9 +1,18 @@
 const router = require('express').Router();
 const { Jobs } = require('../models');
 
+// renders empty job form on  extension
+router.get('/', async (req, res) => {
+    try {
+        res.render('jobForm');
+    }
+    catch {
+        res.status(404).send("Error rendering jobForm");
+    }
+});
+
 // creates new job card with user input
 router.post('/', async (req, res) => {
-
     const newJobCard = await Jobs.create({
         userId: req.session.user.id,
         company: req.body.company,
@@ -15,52 +24,30 @@ router.post('/', async (req, res) => {
     res.send(newJobCard);
 });
 
-// renders empty job form on  extension
-router.get('/', async (req, res) => {
-
-    if (!req.session.isLoggedIn) {
-        return res.redirect('/')
-    }
-    try {
-        res.render('jobForm');
-    }
-    catch {
-        res.status(404).send("Error in fetching all jobCards");
-    }
-});
-
-// renders existing jobcard into job form on  extension
-router.get('/:id', async (req, res) => {
-    try {
-        const dbSelectedJob = await Jobs.findByPk(req.params.id);
-        selectedJob = dbSelectedJob.get({ plain: true });
-        res.render('editJobForm', {
-            selectedJob
-        });
-    } catch {
-        res.status(404).send("Error in fetching all jobCards");
-    }
-});
+// // renders existing jobcard into job form on  extension
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const dbSelectedJob = await Jobs.findByPk(req.params.id);
+//         selectedJob = dbSelectedJob.get({ plain: true });
+//         res.render('editJobForm', {
+//             selectedJob
+//         });
+//     } catch {
+//         res.status(404).send("Error in fetching all jobCards1");
+//     }
+// });
 
 // to search a sepeciv job card by company name
 router.get('/search', async (req, res) => {
-    if (!req.session.isLoggedIn) {
-        return res.redirect('/')
-    }
     try {
 
         const company = req.query.company;
-        const everyJob = await Jobs.findAll({
-            where: {
-                userId: req.session.user.id,
-                company,
-            }
-        });
+        const everyJob = await Jobs.findAll();
 
         res.send(everyJob);
 
     } catch {
-        res.status(404).send("Error in fetching all jobCards");
+        res.status(404).send("Error searching for job card.");
     }
 });
 

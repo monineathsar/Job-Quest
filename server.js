@@ -4,8 +4,6 @@ const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const expsesh = require('express-session');
-const passport = require('passport');
-const local = require('./strategies/local');
 
 const cors = require('cors')
 
@@ -73,8 +71,6 @@ app.use(express.static('public'));
 
 app.use(expsesh(sessionSettings));
 
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

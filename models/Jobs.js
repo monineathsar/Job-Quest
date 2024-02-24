@@ -10,13 +10,6 @@ Jobs.init(
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
         },
-        userId: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'users',
-                key: 'id'
-            }
-        },
         company: {
             type: DataTypes.STRING,
             allowNull: false,

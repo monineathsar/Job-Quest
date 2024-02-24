@@ -35,16 +35,16 @@
   {{!-- job cards section --}}
   <section id="cards" class="cards">
 
-    {{#each eachJob as |singleJob|}}
+    {{#each jobs as |job|}}
 
       <div class="card border-success mb-3" style="max-width: 20rem;">
         <div id="card-name" ++ class="card-header">
-          <h3>{{singleJob.company}}</h3>
+          <h3>{{job.company}}</h3>
           <div class="iconsDiv">
-            <button id="editBtn" onclick="getJobForm('{{singleJob.id}}')">
+            <button id="editBtn" onclick="getJobForm('{{job.id}}')">
               <img src="/assets/images/pencil_icon.png" align="center" width="20px" height="20px" alt="edit icon">
             </button>
-            <button id="deleteBtn" onclick="deleteCard('{{{singleJob.id}}}')">
+            <button id="deleteBtn" onclick="deleteCard('{{{job.id}}}')">
               <img src="/assets/images/bin_icon.png" align="center" width="15px" height="22px" alt="delete icon">
             </button>
           </div>
@@ -52,16 +52,16 @@
         <div id="company1" class="card-body">
           <h4>Job Description:</h4>
           <h6 class="secondaryTitles">Position: 
-            <span>{{singleJob.position}}</span>
+            <span>{{job.position}}</span>
           </h6>
           <h6 class="secondaryTitles">Job post: 
             <span>
-              <a href="{{singleJob.link}}" target="_blank">link</a>
+              <a href="{{job.link}}" target="_blank">link</a>
             </span>
           </h6>
           <h6 class="secondaryTitles">Listed salary: 
             <span>
-            {{#moneyFormat singleJob.salary}}{{/moneyFormat}}
+            {{#moneyFormat job.salary}}{{/moneyFormat}}
             </span>
           </h6>
           {{#if haveApplied }}
@@ -103,20 +103,20 @@
             <h6 class="secondaryTitles">
               Name: 
               <span>
-                {{singleJob.recruiterName}}
+                {{job.recruiterName}}
               </span>
             </h6>
 
             <h6 class="secondaryTitles">
               Phone: 
               <span>
-                {{singleJob.recruiterPhone}}
+                {{job.recruiterPhone}}
               </span>
             </h6>
             <h6 class="secondaryTitles">
               Email: 
               <span>
-                {{singleJob.recruiterEmail}}
+                {{job.recruiterEmail}}
               </span>
             </h6>
           </div>
@@ -165,5 +165,3 @@
 <script src="assets/js/Delete.js"></script>
 <script src="/assets/js/motivationalQ.js"></script>
 
-{{!-- <a href="https://www.vecteezy.com/free-vector/pencil-icon">Pencil Icon Vectors by Vecteezy</a> --}}
-{{!-- <a href="https://www.vecteezy.com/free-vector/web">Web Vectors by Vecteezy</a> --}}

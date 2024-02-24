@@ -1,22 +1,14 @@
 // to render job cards at /jobcard extension
 const router = require('express').Router();
-const { Users, Jobs } = require('../models');
+const { Jobs } = require('../models');
 
 router.get('/jobCards', async (req, res) => {
-    if (!req.session.isLoggedIn) {
-        return res.redirect('/')
-    }
     try {
-
-        const dbEveryJob = await Users.findByPk(req.session.user.id, {
-            include: [{
-                model: Jobs
-            }]
-        });
-        everyJob = dbEveryJob.get({ plain: true });
-        eachJob = everyJob.jobs
+       
+        const jobs = await Jobs.findAll();
+        console.log(jobs);
         res.render('jobCards', {
-            eachJob
+            jobs
         });
     } catch (e) {
         res.status(404).send("Error in fetching all jobCards");
@@ -27,7 +19,6 @@ router.get('/jobCards', async (req, res) => {
 
 router.delete('/jobCards/:id', async (req, res) => {
     const jobsId = req.params.id;
-
     try {
         const jobs = await Jobs.destroy({
             where: {
