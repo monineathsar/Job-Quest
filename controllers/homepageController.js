@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
 // creates new job card with user input
 router.post('/', async (req, res) => {
     const newJobCard = await Jobs.create({
-        userId: req.session.user.id,
         company: req.body.company,
         position: req.body.position,
         link: req.body.link,

@@ -5,7 +5,7 @@ const { Jobs } = require('../models');
 router.get('/jobCards', async (req, res) => {
     try {
        
-        const jobs = await Jobs.findAll();
+        const jobs = await Jobs.findAll({ raw: true });
         console.log(jobs);
         res.render('jobCards', {
             jobs

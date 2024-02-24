@@ -3,5 +3,6 @@ async function deleteCard(id) {
     const result = await fetch(`/jobCards/${id}`, {
         method: 'DELETE'
     });
+    window.location.reload();
 };
 
