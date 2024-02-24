@@ -4,6 +4,23 @@ const searchBtn = document.querySelector('#searchBtn');
 const cardsContainer = document.querySelector('#cards');
 const editJobCard = document.getElementById('editBtn');
 
+document.addEventListener('DOMContentLoaded', function() {
+  var recruiterPhoneElements = document.querySelectorAll('.recruiter-phone');
+
+  recruiterPhoneElements.forEach(function(element) {
+    var rawPhoneNumber = element.textContent.trim();
+    var formattedPhoneNumber = formatUSPhoneNumber(rawPhoneNumber);
+    element.textContent = formattedPhoneNumber;
+  });
+
+  function formatUSPhoneNumber(phoneNumber) {
+    // Remove non-numeric characters
+    var numericValue = phoneNumber.replace(/\D/g, '');
+
+    // Format the phone number (US format: (XXX) XXX-XXXX)
+    return numericValue.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+  }
+});
 
 const makeGetRequest = async (url) => {
 
@@ -129,3 +146,4 @@ searchBtn.addEventListener('click', async (e) => {
 function getJobForm(id) {
   window.location.href = '/jobCards/' + id
 };
+
