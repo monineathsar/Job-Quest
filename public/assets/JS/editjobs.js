@@ -15,35 +15,22 @@ const finalIntInput = document.getElementById('finalInterview');
 const jobOfferInput = document.getElementById('jobOffer')
 const updateJobBtn = document.getElementById('updateBtn');
 
-document.getElementById('recruiterPhone').addEventListener('input', function() {
-// Get the input value
-var inputValue = this.value;
+document.getElementById('recruiterPhone').addEventListener('input', function () {
+    var formattedValue = formatUSPhoneNumber(this.value);
 
-// Remove non-numeric characters
-var numericValue = inputValue.replace(/\D/g, '');
+    // Update the input value
+    this.value = formattedValue;
 
-// Ensure it contains at most 10 digits
-var trimmedValue = numericValue.slice(0, 10);
-
-// Format the phone number (US format: (XXX) XXX-XXXX)
-var formattedValue = trimmedValue.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-
-// Update the input value
-this.value = formattedValue;
-
-// Validate and display error message
-var validationErrorElement = document.getElementById('phoneValidationError');
-if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(formattedValue)) {
-    validationErrorElement.textContent = 'Invalid phone number format';
-} else {
-    validationErrorElement.textContent = '';
-}
+    // Validate and display error message
+    var validationErrorElement = document.getElementById('phoneValidationError');
+    validationErrorElement.textContent = validateUSPhoneNumber(formattedValue);
 });
 
-function rangValfunc(val) {
-    document.querySelector("#rangeVal").innerHTML = "$" + val;
-    radius = val;
-};
+document.getElementById('recruiterEmail').addEventListener('input', function () {
+    // Validate and display error message
+    var validationErrorElement = document.getElementById('recruiterEmailValidationError');
+    validationErrorElement.textContent = validateEmailAddress(this.value);
+});
 
 // for UPDATING job card
 async function updateJob(id) {
@@ -79,3 +66,4 @@ async function updateJob(id) {
         alert(error);
     }
 };
+
