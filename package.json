@@ -32,5 +32,8 @@
     "passport-local": "^1.0.0",
     "sequelize": "^6.21.3"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
