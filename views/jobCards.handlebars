@@ -1,32 +1,4 @@
 <body>
-  {{!-- nav bar section --}}
-
-  <section id="navBar">
-
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a href="/"><img src="/assets/images/Job Quest logo.jpeg" class="logo" height="100px"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Create Job Card</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/jobcards">Your Job Cards</a>
-          </li>
-        </ul>
-        <form id="formId" class="form-inline my-2 my-lg-0">
-          <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Search for a job card..."
-            aria-label="Search">
-        </form>
-        <button class="btn btn-outline-success my-2 my-lg-10" type="submit" id="searchBtn">Search</button>
-      </div>
-    </nav>
-
-  </section>
   <h3>
     <span class="lead font-italic" id="funQuote"></span>
   </h3>
@@ -37,124 +9,124 @@
 
     {{#each jobs as |job|}}
 
-      <div class="card border-success mb-3" style="max-width: 20rem;">
-        <div id="card-name" ++ class="card-header">
-          <h3>{{job.company}}</h3>
-          <div class="iconsDiv">
-            <button id="editBtn" onclick="getJobForm('{{job.id}}')">
-              <img src="/assets/images/pencil_icon.png" align="center" width="20px" height="20px" alt="edit icon">
-            </button>
-            <button id="deleteBtn" onclick="deleteCard('{{{job.id}}}')">
-              <img src="/assets/images/bin_icon.png" align="center" width="15px" height="22px" alt="delete icon">
-            </button>
-          </div>
-        </div>
-        <div id="company1" class="card-body">
-          <h4>Job Description:</h4>
-          <h6 class="secondaryTitles">Position: 
-            <span>{{job.position}}</span>
-          </h6>
-          <h6 class="secondaryTitles">Job post: 
-            <span>
-              <a href="{{job.link}}" target="_blank">link</a>
-            </span>
-          </h6>
-          <h6 class="secondaryTitles">Listed salary: 
-            <span>
-            {{#moneyFormat job.salary}}{{/moneyFormat}}
-            </span>
-          </h6>
-          {{#if haveApplied }}
-            <h6>
-              <label id="checkbox" for="checkbox">
-                Applied to job?
-                <input type="checkbox" id="appliedTo" checked disabled="true" class="card-title"></input>
-              </label>
-            </h6>
-          {{/if}}
-          {{#unless haveApplied}}
-            <h6>
-              <label for="checkbox">
-                Applied to job?
-                <input type="checkbox" id="appliedTo" disabled="true" class="card-title"></input>
-              </label>
-            </h6>
-          {{/unless}}
-
-          {{#if feedback }}
-            <h6>
-              <label for="checkbox">
-                Any feedback?
-                <input type="checkbox" id="feedback" checked disabled="true" class="card-title"></input>
-              </label>
-            </h6>
-
-          {{/if}}
-          {{#unless feedback}}
-            <h6>
-              <label for="checkbox">
-                Any feedback?
-                <input type="checkbox" id="feedback" disabled="true" class="card-title"></input>
-              </label>
-            </h6>
-          {{/unless}}
-          <div>
-            <h4>Recruiter:</h4>
-            <h6 class="secondaryTitles">
-              Name: 
-              <span>
-                {{job.recruiterName}}
-              </span>
-            </h6>
-
-            <h6 class="secondaryTitles">
-              Phone: 
-              <span class="recruiter-phone">
-                {{job.recruiterPhone}}
-              </span>
-            </h6>
-            <h6 class="secondaryTitles">
-              Email: 
-              <span>
-                {{job.recruiterEmail}}
-              </span>
-            </h6>
-          </div>
-
-          <div>
-            <h4>Interview:</h4>
-            <h6 class="secondaryTitles">
-              Screening interview: <br>
-              <span>
-                {{#dateFormat screeningInterview}} {{/dateFormat}}
-              </span>
-            </h6>
-            <h6 class="secondaryTitles">
-              Technical interview: <br>
-              <span>
-                {{#dateFormat technicalInterview}} {{/dateFormat}}
-              </span>
-            </h6>
-            <h6 class="secondaryTitles">
-              Final interview: <br>
-              <span>
-                {{#dateFormat finalInterview}} {{/dateFormat}}
-              </span>
-            </h6>
-          </div>
-          <div>
-            <h4>
-              Job Offer:
-            </h4>
-            <h6 class="secondaryTitles">
-              Benefits package: <br>
-              <span>
-                {{#formatStringData jobOffer}}{{/formatStringData}}
-              </span>
-            </h6>
-          </div>
+    <div class="card border-success mb-3" style="max-width: 20rem;">
+      <div id="card-name" ++ class="card-header">
+        <h3>{{job.company}}</h3>
+        <div class="iconsDiv">
+          <button id="editBtn" onclick="getJobForm('{{job.id}}')">
+            <img src="/assets/images/pencil_icon.png" align="center" width="20px" height="20px" alt="edit icon">
+          </button>
+          <button id="deleteBtn" onclick="deleteCard('{{{job.id}}}')">
+            <img src="/assets/images/bin_icon.png" align="center" width="15px" height="22px" alt="delete icon">
+          </button>
         </div>
       </div>
+      <div id="company1" class="card-body">
+        <h4>Job Description:</h4>
+        <h6 class="secondaryTitles">Position:
+          <span>{{job.position}}</span>
+        </h6>
+        <h6 class="secondaryTitles">Job post:
+          <span>
+            <a href="{{job.link}}" target="_blank">link</a>
+          </span>
+        </h6>
+        <h6 class="secondaryTitles">Listed salary:
+          <span>
+            {{#moneyFormat job.salary}}{{/moneyFormat}}
+          </span>
+        </h6>
+        {{#if haveApplied }}
+        <h6>
+          <label id="checkbox" for="checkbox">
+            Applied to job?
+            <input type="checkbox" id="appliedTo" checked disabled="true" class="card-title"></input>
+          </label>
+        </h6>
+        {{/if}}
+        {{#unless haveApplied}}
+        <h6>
+          <label for="checkbox">
+            Applied to job?
+            <input type="checkbox" id="appliedTo" disabled="true" class="card-title"></input>
+          </label>
+        </h6>
+        {{/unless}}
+
+        {{#if feedback }}
+        <h6>
+          <label for="checkbox">
+            Any feedback?
+            <input type="checkbox" id="feedback" checked disabled="true" class="card-title"></input>
+          </label>
+        </h6>
+
+        {{/if}}
+        {{#unless feedback}}
+        <h6>
+          <label for="checkbox">
+            Any feedback?
+            <input type="checkbox" id="feedback" disabled="true" class="card-title"></input>
+          </label>
+        </h6>
+        {{/unless}}
+        <div>
+          <h4>Recruiter:</h4>
+          <h6 class="secondaryTitles">
+            Name:
+            <span>
+              {{job.recruiterName}}
+            </span>
+          </h6>
+
+          <h6 class="secondaryTitles">
+            Phone:
+            <span class="recruiter-phone">
+              {{job.recruiterPhone}}
+            </span>
+          </h6>
+          <h6 class="secondaryTitles">
+            Email:
+            <span>
+              {{job.recruiterEmail}}
+            </span>
+          </h6>
+        </div>
+
+        <div>
+          <h4>Interview:</h4>
+          <h6 class="secondaryTitles">
+            Screening interview: <br>
+            <span>
+              {{#dateFormat screeningInterview}} {{/dateFormat}}
+            </span>
+          </h6>
+          <h6 class="secondaryTitles">
+            Technical interview: <br>
+            <span>
+              {{#dateFormat technicalInterview}} {{/dateFormat}}
+            </span>
+          </h6>
+          <h6 class="secondaryTitles">
+            Final interview: <br>
+            <span>
+              {{#dateFormat finalInterview}} {{/dateFormat}}
+            </span>
+          </h6>
+        </div>
+        <div>
+          <h4>
+            Job Offer:
+          </h4>
+          <h6 class="secondaryTitles">
+            Benefits package: <br>
+            <span>
+              {{#formatStringData jobOffer}}{{/formatStringData}}
+            </span>
+          </h6>
+        </div>
+      </div>
+    </div>
     {{/each}}
 
   </section>
@@ -163,6 +135,5 @@
 
 <script src="assets/js/cards.js"></script>
 <script src="assets/js/common/cardsUtil.js"></script>
-<script src="assets/js/Delete.js"></script>
+<script src="assets/js/delete.js"></script>
 <script src="/assets/js/motivationalQ.js"></script>
-
