@@ -45,4 +45,17 @@ router.delete('/jobCards/:id', async (req, res) => {
     }
 });
 
+// to search a sepeciv job card by company name
+router.get('/search', async (req, res) => {
+    try {
+        const jobs = await Jobs.findAll({ where: { company: req.query.company }, raw: true });
+        res.render('jobCards', {
+            jobs
+        });
+
+    } catch {
+        res.status(404).send("Error searching for job card.");
+    }
+});
+
 module.exports = router;

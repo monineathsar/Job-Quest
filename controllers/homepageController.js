@@ -23,19 +23,6 @@ router.post('/', async (req, res) => {
     res.send(newJobCard);
 });
 
-// to search a sepeciv job card by company name
-router.get('/search', async (req, res) => {
-    try {
-
-        const company = req.query.company;
-        const everyJob = await Jobs.findAll();
-
-        res.send(everyJob);
-
-    } catch {
-        res.status(404).send("Error searching for job card.");
-    }
-});
 
 // to update jobcards
 router.put('/', async (req, res) => {
