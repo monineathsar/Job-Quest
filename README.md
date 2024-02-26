@@ -35,19 +35,14 @@ SO THAT I can easily track all my jobs and stay organized during my job seach pr
 ​
 ```
 GIVEN a user friendly web application
-WHEN I input my username and password
-THEN I sign up and log in to my account
 WHEN I input information about a job
 THEN I save the information in a data base for future reference
 WHEN I choose to view the job's information
 THEN I am presented with all the information
-WHEN I log out of the session
-THEN I end my session and redirected to the login page
 ```
 ​
 ### Screenshot
 ​
-![](./public/assets/images/signup-login-screenshot.JPG)
 ![](./public/assets/images/jobformscreenshot.JPG)
 ![](./public/assets/images/jobcardscreenshot.JPG)
 ​

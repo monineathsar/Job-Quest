@@ -74,7 +74,7 @@ app.use(expsesh(sessionSettings));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// routes for SignUp/LogIn page, jobform page, and jobCard page
+// jobform page (home), and jobCard page
 app.use(routes);
 app.use(jobCardRoute);
 
