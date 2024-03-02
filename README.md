@@ -53,6 +53,12 @@ THEN I am presented with all the information
 ​
 ## My process
 ​
+### How to locally test 
+
+1. Add below to .env in the root directory
+2. npm install
+3. npm start
+
 ### Built with
 ​
 - Node.js
