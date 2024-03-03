@@ -1,5 +1,4 @@
 # Job Quest
-​
 ## Table of contents
 - [Overview](#overview)
   - [The challenge](#the-challenge)
@@ -47,6 +46,13 @@ THEN I am presented with all the information
 ## My process
 ### How to locally test 
 1. Add below to .env in the root directory
+```
+SESSION_SECRET=ghcfgdjtdjtyddtdjytdfyf7t7
+JAWSDB_URL=mysql://f6dkl8jr06dlhi5v:ngi03hibbmb2mfjw@m7az7525jg6ygibs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/umpo4m9v6lkoglv7
+DB_USER=f6dkl8jr06dlhi5v
+DB_PASSWORD=ngi03hibbmb2mfjw
+DB_NAME=umpo4m9v6lkoglv7
+```
 2. npm install
 3. npm start
 
