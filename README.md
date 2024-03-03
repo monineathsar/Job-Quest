@@ -34,7 +34,6 @@ THEN I save the information in a data base for future reference
 WHEN I choose to view the job's information
 THEN I am presented with all the information
 ```
-​
 ### Screenshot
 ![](./public/assets/images/jobformscreenshot.JPG)
 ![](./public/assets/images/jobcardscreenshot.JPG)
