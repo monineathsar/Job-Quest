@@ -65,16 +65,9 @@ app.use(cors());
 app.use(express.static('public'));
 
 app.use(expsesh(sessionSettings));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public', {
-    setHeaders: (res, path, stat) => {
-        if (path.endsWith('.js')) {
-            res.type('application/javascript');
-        }
-    },
-}));
+app.use(express.static(path.join(__dirname, "js")));
 
 // jobform page (home), and jobCard page
 app.use(routes);
