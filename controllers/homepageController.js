@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
         salary: req.body.salary
     });
 
-    res.send(newJobCard);
+    res.redirect('/jobCards');
 });
 
 
